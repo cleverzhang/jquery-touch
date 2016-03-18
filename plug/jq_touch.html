@@ -6,8 +6,8 @@
 </head>
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0">
 
-<script src="jquery-1.11.2.js"></script>
-<script src="jquery-touch.js"></script>
+<script src="../jquery/jquery-2.2.2.min.js"></script>
+<script src="jquery-touch.min.js"></script>
 <style>
     html,body{-webkit-touch-callout: none;}
     #debug{width: 100%;height:100%;}
@@ -16,7 +16,8 @@
 </style>
 <body>
 <div id="debug"></div>
-<div id="touch">tap or press</div>
+<a  href="http://weibo.com">
+    <div id="touch">tap or press</div></a>
 </body>
 <script type="text/javascript">
     var debug = function(cnt){
@@ -29,14 +30,13 @@
             debug('tap!!!');
         });
         $("#touch").press(function(){
-            $(this).addClass("shadow");
             debug('press!!!');
         });
     });
 
-    setTimeout(function(){
-        $("#touch").untap();
-        $("#touch").unpress();
-    }, 10000)
+//    setTimeout(function(){
+//        $("#touch").untap();
+//        $("#touch").unpress();
+//    }, 10000)
 </script>
 </html>

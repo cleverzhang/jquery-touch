@@ -1,9 +1,11 @@
 /**
- * Created by shijun on 15/2/26.
+ * Created by @厕所的灯 on 15/2/26.
  */
 
 (function($){
     var touch_events = "touchstart touchmove touchend touchcancel";
+    var mouse_events = "mousedown mousemove mouseup mousecancel";
+    var event_arr = [];
     var tap_func_maps = {};
     var press_func_maps = {};
     var tap_crash = false;
@@ -28,6 +30,8 @@
         do{
             elm = $(elm);
             tag_name = elm[0].tagName.toLowerCase();
+            //阻止标签的默认click事件
+            elm.on('click',function(){return false});
             if (elm.attr("tap_id")){
                 return elm;
             }
@@ -48,25 +52,25 @@
         }
         var tap_id = tap_target.attr("tap_id");
         switch(evt.type){
-            case "touchstart" :
+            case event_arr[0] :
                 clearTimeout(press_inter);
                 press_inter = setTimeout(function(){
                     !tap_crash && !pressed && press_func_maps[tap_id] && press_func_maps[tap_id]();
                     pressed = true;
                 }, press_time_def)
                 break;
-            case "touchmove" :
+            case event_arr[1] :
                 clearTimeout(press_inter);
                 tap_crash = true;
                 pressed = false;
                 break;
-            case "touchend" :
+            case event_arr[2] :
                 !tap_crash && !pressed && tap_func_maps[tap_id] && tap_func_maps[tap_id]();
                 clearTimeout(press_inter);
                 tap_crash = false;
                 pressed = false;
                 break;
-            case "touchcancel" :
+            case event_arr[3] :
                 clearTimeout(press_inter);
                 tap_crash = false;
                 pressed = false;
@@ -78,9 +82,10 @@
 
     var init = function(){
         if (!is_mobi_dev){
-            return;
+            touch_events = mouse_events;
         }
-        touch_events.split(" ").forEach(function(event_name){
+        event_arr = touch_events.split(" ");
+        event_arr.forEach(function(event_name){
             $(document).on(event_name, touch_handler);
         });
     };
