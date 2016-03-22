@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0">
+
+<script src="../jquery/jquery-2.2.2.min.js"></script>
+<script src="jquery-load-more.min.js"></script><p>
+<style>
+    html,body{margin:0;padding:0;-webkit-touch-callout: none;width:100%;height:100%;}
+    #debug{width: 100%;height:auto;}
+
+</style>
+<body>
+<span id="load_more">
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p><p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p><p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+<p>页面内容</p>
+</span>
+</body>
+<script type="text/javascript">
+    var debug = function(cnt){
+        $('#load_more').append($(cnt));
+    }
+    $(document).ready(function(){
+        $.loadmore.load(function(){
+            setTimeout(function(){
+                debug("<p>load more test</p><p>load more test</p><p>load more test</p><p>load more test</p><p>load more test</p><p>load more test</p>")
+                $.loadmore.loadEnd();
+            },2000)
+        });
+    });
+
+</script>
+</html>
