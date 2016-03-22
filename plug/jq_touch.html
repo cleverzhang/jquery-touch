@@ -7,17 +7,23 @@
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0">
 
 <script src="../jquery/jquery-2.2.2.min.js"></script>
-<script src="jquery-touch.min.js"></script>
+<script src="jquery-touch.js"></script>
 <style>
-    html,body{-webkit-touch-callout: none;}
-    #debug{width: 100%;height:100%;}
-    #touch{padding:20px;width:100px;height:100px;background: #f00;border-radius: 40px;position: absolute;top:50%;left:50%}
-    .shadow{box-shadow: 5px 5px 10px yellow}
+    html,body{margin:0;padding:0;-webkit-touch-callout: none;width:100%;height:100%;}
+    #debug{width: 100%;height:auto;}
+    p{display: block;margin:50px; background: #5490ff}
 </style>
 <body>
+<div style="padding:50px;text-align: center">
+    <p id="tap" href="http://weibo.com">Tap</p>
+
+    <p id="press" href="http://weibo.com">Press</p>
+
+    <p id="tap_press" href="http://weibo.com">Tap Or Press</p>
+</div>
 <div id="debug"></div>
-<a  href="http://weibo.com">
-    <div id="touch">tap or press</div></a>
+
+
 </body>
 <script type="text/javascript">
     var debug = function(cnt){
@@ -26,17 +32,17 @@
         document.getElementById("debug").appendChild(dom);
     }
     $(document).ready(function(){
-        $("#touch").tap(function(){
-            debug('tap!!!');
+        $("p").tap(function(){
+            debug('tap:' + $(this).html());
         });
-        $("#touch").press(function(){
-            debug('press!!!');
+        $("p").press(function(){
+            debug('press:' + $(this).html());
+        });
+        $("p").move(function(){
+            debug('move:' + $(this).html());
         });
     });
 
-//    setTimeout(function(){
-//        $("#touch").untap();
-//        $("#touch").unpress();
-//    }, 10000)
+
 </script>
 </html>
