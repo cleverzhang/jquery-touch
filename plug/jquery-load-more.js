@@ -14,8 +14,8 @@
             if (loading || destory || !div_loaded){
                 return;
             }
-            var doc = $("body");
-            var offset = $('._loadmore').offset().top - (doc.height() + doc.scrollTop());
+            var win = $(window);
+            var offset = $('._loadmore').offset().top - (win.height() + win.scrollTop());
             if(offset <= 50) {
                 loading = true;
                 event_func();
