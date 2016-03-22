@@ -8,8 +8,10 @@
     var event_arr = [];
     var tap_func_maps = {};
     var press_func_maps = {};
+    var move_func_maps = {};
     var tap_crash = false;
     var pressed = false;
+    var can_move = false;
     var press_inter = null;
     var press_time_def = 1000;
     var is_mobi_dev = "ontouchstart" in window;
@@ -30,8 +32,6 @@
         do{
             elm = $(elm);
             tag_name = elm[0].tagName.toLowerCase();
-            //阻止标签的默认click事件
-            elm.on('click',function(){return false});
             if (elm.attr("tap_id")){
                 return elm;
             }
@@ -41,10 +41,10 @@
     };
     var touch_handler = function(evt){
         //默认的evt是被jq标准化过的event，不含有touches
-        evt = event || evt;
+        evt = evt || event;
         if (evt.touches && evt.touches.length > 1){
             tap_crash = true;
-            return;
+            return false;
         }
         var tap_target = _get_tap_target(evt.target);
         if (!tap_target){
@@ -54,30 +54,43 @@
         switch(evt.type){
             case event_arr[0] :
                 clearTimeout(press_inter);
+                can_move = true;
                 press_inter = setTimeout(function(){
-                    !tap_crash && !pressed && press_func_maps[tap_id] && press_func_maps[tap_id]();
-                    pressed = true;
-                }, press_time_def)
+                    if (!tap_crash && !pressed && press_func_maps[tap_id]){
+                        pressed = true;
+                        can_move = false;
+                        return press_func_maps[tap_id](evt);
+                    }
+                }, press_time_def);
                 break;
             case event_arr[1] :
                 clearTimeout(press_inter);
+                //阻止pc mouse move事件
+                if (!can_move){
+                    return false;
+                }
                 tap_crash = true;
                 pressed = false;
+                if (can_move && move_func_maps[tap_id]){
+                    return move_func_maps[tap_id](evt);
+                }
                 break;
             case event_arr[2] :
-                !tap_crash && !pressed && tap_func_maps[tap_id] && tap_func_maps[tap_id]();
                 clearTimeout(press_inter);
+                !tap_crash && !pressed && tap_func_maps[tap_id] && tap_func_maps[tap_id](evt);
                 tap_crash = false;
                 pressed = false;
+                can_move = false;
+                return false;
                 break;
             case event_arr[3] :
                 clearTimeout(press_inter);
                 tap_crash = false;
                 pressed = false;
+                can_move = false;
                 break;
             default:
         }
-        return false;
     };
 
     var init = function(){
@@ -108,20 +121,46 @@
         },
         "unpress" : function(tap_id){
             delete press_func_maps[tap_id];
+        },
+        "onmove" : function(tap_id, tap_func){
+            if (!move_func_maps[tap_id]){
+                move_func_maps[tap_id] = tap_func;
+            }
+        },
+        "unmove" : function(tap_id){
+            delete move_func_maps[tap_id];
         }
     };
     $.fn.extend({
         "tap" : function(func){
-            touch.ontap(_get_tap_id($(this)), $.proxy(func, this));
+            $(this).each(function(){
+                touch.ontap(_get_tap_id($(this)), $.proxy(func, this));
+            })
         },
         "untap" : function(){
-            touch.untap(_get_tap_id($(this)));
+            $(this).each(function(){
+                touch.untap(_get_tap_id($(this)));
+            })
         },
         "press" : function(func){
-            touch.onpress(_get_tap_id($(this)), $.proxy(func, this));
+            $(this).each(function(){
+                touch.onpress(_get_tap_id($(this)), $.proxy(func, this));
+            })
         },
         "unpress" : function(){
-            touch.unpress(_get_tap_id($(this)));
+            $(this).each(function(){
+                touch.unpress(_get_tap_id($(this)));
+            })
+        },
+        "move" : function(func){
+            $(this).each(function(){
+                touch.onmove(_get_tap_id($(this)), $.proxy(func, this));
+            })
+        },
+        "unmove" : function(){
+            $(this).each(function(){
+                touch.unmove(_get_tap_id($(this)));
+            })
         }
     });
 })($);
