@@ -31,7 +31,6 @@
         ._layout_dialog{\
             z-index: 10001;\
             position: fixed;\
-            background: #FFF;\
             opacity: 0;\
             transition:opacity 300ms;\
             -moz-transition:opacity 300ms;\
