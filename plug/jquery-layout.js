@@ -103,14 +103,14 @@
         });
     }
     layout.prototype.showDialog = function(html, options){
+        var _this = this;
+        var def_evt = "click";
         layout_init();
         options = $.extend({
             "ok" : function(){},
             "cancel" : function(){},
             "auto_hidden" : false
         }, options);
-        var _this = this;
-        var def_evt = "click";
         dialog_obj.html("");
         clearTimeout(dialog_interval);
         clearTimeout(auto_hidden_interval);
