@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+
+<script src="../jquery/jquery-2.2.2.min.js"></script>
+<script src="jquery-touch.min.js"></script>
+<script src="jquery-layout.js"></script>
+<style>
+    html,body{margin:0;padding:0;-webkit-touch-callout: none;width:100%;height:100%;}
+    #debug{width: 100%;height:auto;}
+    p{display: block;padding:50px;margin:50px; background: #5490ff}
+</style>
+<body>
+<div style="padding:50px;text-align: center">
+    <p id="tap0">Show Tip and auto hidden</p>
+
+    <p id="tap1">Show HTML</p>
+
+    <p id="tap2">Show iFrame</p>
+</div>
+<div id="debug"></div>
+
+
+</body>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#tap0").tap(function(){
+            $.dialog.show("<div style='background-color:#fff;width:100px;height:100px;line-height: 100px;text-align: center'>Thank you!</div>", {'auto_hidden':true});
+        });
+        $("#tap1").tap(function(){
+            $.dialog.show("<div style='background-color:#fff;width:200px;height:100px;'><ul><li class='_layout_tap_cancel'>tap cancel</li><li  class='_layout_tap_ok'>tap ok</li></ul></div>");
+        });
+        $("#tap2").tap(function(){
+            $.dialog.show("<div style='background-color:#fff;width:100px;height:100px;'><iframe src='http://weibo.com'></iframe></div>");
+        });
+    });
+
+</script>
+</html>
