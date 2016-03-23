@@ -102,6 +102,8 @@
         });
     }
     layout.prototype.showDialog = function(html, options){
+        clearTimeout(dialog_interval);
+        clearTimeout(auto_hidden_interval);
         var _this = this;
         var def_evt = "click";
         layout_init();
@@ -111,8 +113,6 @@
             "auto_hidden" : false
         }, options);
         dialog_obj.html("");
-        clearTimeout(dialog_interval);
-        clearTimeout(auto_hidden_interval);
         html = $(html);
         if ($.fn.tap) {
             def_evt = "tap";
