@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+
+<script src="../jquery/jquery-2.2.2.min.js"></script>
+<script src="jquery-fullPage.js"></script>
+<style>
+    html,body{margin:0;padding:0;-webkit-touch-callout: none;width:100%;height:100%;}
+    #debug{width: 100%;height:auto;}
+    .but{margin:0;padding:0;display: block;width:100px;height:100px; background: #5490ff}
+</style>
+<body>
+<div style="padding:50px;text-align: center">
+    <p id="tap0">Click me</p>
+
+    <p id="tap1">Content</p>
+
+    <p id="tap1">Content</p>
+
+    <p id="tap1">Content</p>
+
+    <p id="tap1">Content</p>
+
+    <p id="tap1">Content</p>
+
+    <p id="tap1">Content</p>
+
+
+
+    <p id="tap1">Content</p>
+
+    <p id="tap1">Content</p>
+
+    <p id="tap1">Content</p>
+
+    <p id="tap1">Content</p>
+
+    <p id="tap1">Content</p>
+
+    <p id="tap1">Content</p>
+
+    <p id="tap1">Content</p>
+
+    <p id="tap1">Content</p>
+
+    <p id="tap1">Content</p>
+
+    <p id="tap1">Content</p>
+
+    <p id="tap1">Content</p>
+
+    <p id="tap1">Content</p>
+
+    <p id="tap1">Content</p>
+
+    <p id="tap1">Content</p>
+
+    <p id="tap1">Content</p>
+
+    <p id="tap1">Content</p>
+
+    <p id="tap1">Content</p>
+
+    <p id="tap1">Content</p>
+</div>
+
+</body>
+<script type="text/javascript">
+    $('#tap0').click(function(){
+        var html = "<div><div class='but close_page'>click to close this page</div><div class='but new_page'>Click to open new page</div><h1>Content</h1><h1>Content</h1><h1>Content</h1><h1>Content</h1><h1>Content</h1><h1>Content</h1><h1>Content</h1><h1>Content</h1><h1>Content</h1><h1>Content</h1><h1>Content</h1><h1>Content</h1><h1>Content</h1><h1>Content</h1><h1>Content</h1></div>";
+        html = $(html);
+        $('.close_page', html).click(function(){
+
+            $.fullPage.hidden();
+        });
+        $('.new_page', html).click(function(){
+            var new_page = "<div><div class='but close_page' style=' padding: 200px'>click to close this page</div></div>";
+            new_page = $(new_page);
+            $('.close_page', new_page).click(function(){
+
+                $.fullPage.hidden();
+            });
+            $.fullPage.addNewPage(new_page, "antiquewhite").show();
+        });
+        $.fullPage.addNewPage(html, "burlywood").show();
+    });
+
+</script>
+</html>
