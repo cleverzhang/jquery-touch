@@ -22,20 +22,20 @@
             position: fixed;\
             background: #000;\
             opacity: 0;\
-            transition:opacity 300ms;\
-            -moz-transition:opacity 300ms;\
-            -webkit-transition:opacity 300ms;\
-            -o-transition:opacity 300ms;\
+            transition:opacity 500ms;\
+            -moz-transition:opacity 500ms;\
+            -webkit-transition:opacity 500ms;\
+            -o-transition:opacity 500ms;\
             display: none;\
         }\
         ._layout_dialog{\
             z-index: 10001;\
             position: fixed;\
             opacity: 0;\
-            transition:opacity 300ms;\
-            -moz-transition:opacity 300ms;\
-            -webkit-transition:opacity 300ms;\
-            -o-transition:opacity 300ms;\
+            transition:opacity 500ms;\
+            -moz-transition:opacity 500ms;\
+            -webkit-transition:opacity 500ms;\
+            -o-transition:opacity 500ms;\
             display: none;\
         }\
             </style>");
@@ -78,7 +78,7 @@
         mask_obj.css("opacity", 0);
         mask_interval = setTimeout(function(){
             mask_obj.css("display", "none");
-        }, 300);
+        }, 600);
     }
     layout.prototype.hiddenDialog = function(){
         clearTimeout(dialog_interval);
@@ -86,7 +86,7 @@
         dialog_interval = setTimeout(function(){
             dialog_obj.css("display", "none");
 
-        }, 300);
+        }, 600);
     }
     layout.prototype.hidden = function(){
         this.hiddenMask();
@@ -96,10 +96,10 @@
         layout_init();
         clearTimeout(mask_interval);
         mask_full_screen();
-        mask_obj.css({
-            "display" : "block",
-            "opacity" : 0.3
-        });
+        mask_obj.css("display", "block");
+        setTimeout(function(){
+            mask_obj.css("opacity", 0.3);
+        },15);
     }
     layout.prototype.showDialog = function(html, options){
         clearTimeout(dialog_interval);
@@ -127,15 +127,15 @@
         });
         dialog_obj.append(html);
         dialog_middle_screen();
-        dialog_obj.css({
-            "display" : "block",
-            "opacity" : 1
-        });
+        dialog_obj.css("display", "block");
+        setTimeout(function(){
+            dialog_obj.css("opacity", 1);
+        },15);
         if (options["auto_hidden"]){
             var _this = this;
             auto_hidden_interval = setTimeout(function(){
                 _this.hidden();
-            }, 1500);
+            }, 1700);
         }
     }
     layout.prototype.show = function(html, options){
