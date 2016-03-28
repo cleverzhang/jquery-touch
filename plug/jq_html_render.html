@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+
+<script src="../jquery/jquery-2.2.2.min.js"></script>
+<script src="extend.min.js"></script>
+<style>
+    html,body{margin:0;padding:0;-webkit-touch-callout: none;width:100%;height:100%;}
+    #debug{width: 100%;height:auto;}
+</style>
+<body>
+<div id="temp">
+sss
+</div>
+<script type="text/template" id="user_temp">
+
+<div>
+    {# name #}<p>{# birth #}</p>
+    <foreach id="foreach">
+        <ul>
+            <li>{# foreach[a] #}</li>
+            <li>{# foreach[b] #}</li>
+            <li>{# foreach[c] #}</li>
+            <li>{# foreach[d] #}</li>
+        </ul>
+    </foreach>
+    <foreach id="ok">
+        <div>{# aq #}</div>
+        <div>{# bw #}</div>
+        <div>{# cd #}</div>
+    </foreach>
+</div>
+
+</script>
+</body>
+<script type="text/javascript">
+    var vars = {"name": "shijun", "birth":"0524"};
+    vars["foreach"] = [
+        {"a": "test","b": "test1","c": "test2"},
+        {"a": "test","b": "test1","c": "test2"}
+    ];
+
+    var ret = $.templateRender("user_temp", vars);
+    $("#temp").html(ret);
+
+</script>
+</html>
