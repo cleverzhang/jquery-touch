@@ -41,15 +41,15 @@
                 if ($.isArray(vars[name])){
                     var f_html = "";
                     var foreach_template = $("#" + name, html_template);
-                    var foreach_html = foreach_template.html();
                     vars[name].forEach(function(f_o){
+                        var foreach_html = foreach_template.html();
                         for (var f_name in f_o){
                             var reg = new RegExp("{#\\s*" + name + "\\s*\\[\\s*" + f_name + "\\s*\\]\\s*#}");
                             foreach_html = foreach_html.replace(reg, f_o[f_name]);
                         }
                         f_html += foreach_html;
                     });
-                    reg = new RegExp("<foreach\\s+id=['\\\"]" + name + "['\\\"]>[\\s\\S]+?<\\/foreach>", "igm");
+                    reg = new RegExp("<foreach\\s+id=['\\\"]" + name + "['\\\"]>[\\s\\S]*?<\\/foreach>", "igm");
                     html_result = html_result.replace(reg, f_html);
                 }
                 else{

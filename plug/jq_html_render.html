@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
 
 <script src="../jquery/jquery-2.2.2.min.js"></script>
-<script src="extend.min.js"></script>
+<script src="extend.js"></script>
 <style>
     html,body{margin:0;padding:0;-webkit-touch-callout: none;width:100%;height:100%;}
     #debug{width: 100%;height:auto;}
@@ -25,13 +25,15 @@ sss
             <li>{# foreach[a] #}</li>
             <li>{# foreach[b] #}</li>
             <li>{# foreach[c] #}</li>
-            <li>{# foreach[d] #}</li>
         </ul>
     </foreach>
-    <foreach id="ok">
-        <div>{# aq #}</div>
-        <div>{# bw #}</div>
-        <div>{# cd #}</div>
+    <foreach id="foreach"></foreach>
+    <foreach id="test">
+        <ul>
+            <li>{# test[a] #}</li>
+            <li>{# test[b] #}</li>
+            <li>{# test[c] #}</li>
+        </ul>
     </foreach>
 </div>
 
@@ -40,8 +42,11 @@ sss
 <script type="text/javascript">
     var vars = {"name": "shijun", "birth":"0524"};
     vars["foreach"] = [
-        {"a": "test","b": "test1","c": "test2"},
-        {"a": "test","b": "test1","c": "test2"}
+        {"a": "test","b": "test1","c": "test3"},
+        {"a": "test","b": "test1","c": "test4"},
+        {"a": "test","b": "test1","c": "test5"},
+        {"a": "test","b": "test1","c": "test6"},
+        {"a": "test","b": "test1","c": "<a href='#'>haha</a>"}
     ];
 
     var ret = $.templateRender("user_temp", vars);
