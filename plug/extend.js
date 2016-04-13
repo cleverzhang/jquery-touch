@@ -45,7 +45,7 @@
                         vars[name].forEach(function(f_o){
                             var foreach_html = foreach_template.html();
                             for (var f_name in f_o){
-                                var reg = new RegExp("{#\\s*" + name + "\\s*\\[\\s*" + f_name + "\\s*\\]\\s*#}");
+                                var reg = new RegExp("{#\\s*" + name + "\\s*\\[\\s*" + f_name + "\\s*\\]\\s*#}", "igm");
                                 foreach_html = foreach_html.replace(reg, f_o[f_name]);
                             }
                             f_html += foreach_html;
@@ -55,7 +55,7 @@
                     html_result = html_result.replace(reg, f_html);
                 }
                 else{
-                    reg = new RegExp("{#\\s*" + name + "\\s*#}");
+                    reg = new RegExp("{#\\s*" + name + "\\s*#}", "igm");
                     html_result = html_result.replace(reg, vars[name]);
                 }
             }
