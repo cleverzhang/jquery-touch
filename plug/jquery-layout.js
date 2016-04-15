@@ -84,8 +84,8 @@
         clearTimeout(dialog_interval);
         dialog_obj.css("opacity", 0);
         dialog_interval = setTimeout(function(){
+            dialog_obj.html("");
             dialog_obj.css("display", "none");
-
         }, 600);
     }
     layout.prototype.hidden = function(){
@@ -108,8 +108,8 @@
         var def_evt = "click";
         layout_init();
         options = $.extend({
-            "ok" : function(){},
-            "cancel" : function(){},
+            "ok" : function(){return true;},
+            "cancel" : function(){return true;},
             "auto_hidden" : false
         }, options);
         dialog_obj.html("");
@@ -118,12 +118,11 @@
             def_evt = "tap";
         }
         $("._layout_tap_ok", html)[def_evt](function(){
-            options.ok();
-            _this.hidden();
+            options.ok() && _this.hidden();
+            ;
         });
         $("._layout_tap_cancel", html)[def_evt](function(){
-            options.cancel();
-            _this.hidden();
+            options.cancel() && _this.hidden();
         });
         dialog_obj.append(html);
         dialog_middle_screen();
