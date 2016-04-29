@@ -114,6 +114,11 @@
         "untap" : function(tap_id){
             delete tap_func_maps[tap_id];
         },
+        "fire_tap" : function(tap_id){
+            if (tap_func_maps[tap_id]){
+                tap_func_maps[tap_id]();
+            }
+        },
         "onpress" : function(tap_id, tap_func){
             if (!press_func_maps[tap_id]){
                 press_func_maps[tap_id] = tap_func;
@@ -121,6 +126,11 @@
         },
         "unpress" : function(tap_id){
             delete press_func_maps[tap_id];
+        },
+        "fire_press" : function(tap_id){
+            if (press_func_maps[tap_id]){
+                press_func_maps[tap_id]();
+            }
         },
         "onmove" : function(tap_id, tap_func){
             if (!move_func_maps[tap_id]){
@@ -142,6 +152,11 @@
                 touch.untap(_get_tap_id($(this)));
             })
         },
+        "fireTap" : function(){
+            $(this).each(function(){
+                touch.fire_tap(_get_tap_id($(this)));
+            })
+        },
         "press" : function(func){
             $(this).each(function(){
                 touch.onpress(_get_tap_id($(this)), $.proxy(func, this));
@@ -150,6 +165,11 @@
         "unpress" : function(){
             $(this).each(function(){
                 touch.unpress(_get_tap_id($(this)));
+            })
+        },
+        "firePress" : function(){
+            $(this).each(function(){
+                touch.fire_press(_get_tap_id($(this)));
             })
         },
         "move" : function(func){

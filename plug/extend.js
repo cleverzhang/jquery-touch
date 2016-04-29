@@ -64,6 +64,8 @@
         html_result = html_result.replace(reg, "");
         reg = new RegExp("{#\\s*\.+\\s*#}", "img");
         html_result = html_result.replace(reg, "");
+        reg = new RegExp("t_src", "img");
+        html_result = html_result.replace(reg, "src");
         return html_result;
     };
     $.extend({
