@@ -108,6 +108,7 @@
     layout.prototype.hidden = function(){
         this.hiddenMask();
         this.hiddenDialog();
+        this.hiddenActions();
     }
     layout.prototype.showMask = function(){
         layout_init();

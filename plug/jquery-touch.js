@@ -42,12 +42,18 @@
     var touch_handler = function(evt){
         //默认的evt是被jq标准化过的event，不含有touches
         evt = evt || event;
+        if (evt.preventDefault){
+            evt.preventDefault();
+        }
         if (evt.touches && evt.touches.length > 1){
             tap_crash = true;
             return false;
         }
         var tap_target = _get_tap_target(evt.target);
         if (!tap_target){
+            tap_crash = false;
+            pressed = false;
+            can_move = false;
             return;
         }
         var tap_id = tap_target.attr("tap_id");

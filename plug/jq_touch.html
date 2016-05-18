@@ -35,12 +35,13 @@
         $("p").tap(function(){
             debug('tap:' + $(this).html());
         });
-        $("p").press(function(){
+        $("#press").press(function(){
             debug('press:' + $(this).html());
         });
         $("p").move(function(){
             debug('move:' + $(this).html());
         });
+        $("p").firePress();
     });
 
 
