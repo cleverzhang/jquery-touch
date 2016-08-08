@@ -10,7 +10,7 @@
     var mask_html = "<div class='_layout_mask'></div>";
     var dialog_html = "<div class='_layout_dialog'></div>";
     var actions_html = "<div class='_layout_actions '></div>";
-    var mask_obj, dialog_obj, actions_obj, actions_obj_loaded = false;
+    var mask_obj, dialog_obj, actions_obj;
     var cancel_func, ok_func;
     var dialog;
     var def_evt = $.fn.tap ? "tap" : "click";
@@ -50,6 +50,11 @@
             display: none;\
         }\
             </style>");
+
+        //transition: bottom 500ms;\
+        //    -moz-transition: bottom 500ms;\
+        //    -webkit-transition: bottom 500ms;\
+        //    -o-transition: bottom 500ms;\
         $("body").append(mask_html);
         $("body").append(dialog_html);
         $("body").append(actions_html);
@@ -142,22 +147,17 @@
             var _this = this;
             auto_hidden_interval = setTimeout(function(){
                 _this.hidden();
-            }, 500);
+            }, 1700);
         }
     }
     layout.prototype.show = function(html, options){
         this.showMask();
         this.showDialog(html, options);
     }
-    layout.prototype.showActions = function(html, mask){
-        if (actions_obj_loaded){
-            return;
-        }
-        actions_obj_loaded = true;
-        mask = mask || false;
+    layout.prototype.showActions = function(html){
         html = $(html);
         layout_init();
-        mask && this.showMask();
+        this.showMask();
         var _this = this;
         $("._layout_actions_cancel", html)[def_evt](function(){
             _this.hiddenActions()
@@ -185,7 +185,6 @@
                 "transition" : "",
                 "display"     : "none"
             });
-            actions_obj_loaded = false;
         },200);
     };
     dialog = new layout();
