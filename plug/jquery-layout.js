@@ -50,11 +50,6 @@
             display: none;\
         }\
             </style>");
-
-        //transition: bottom 500ms;\
-        //    -moz-transition: bottom 500ms;\
-        //    -webkit-transition: bottom 500ms;\
-        //    -o-transition: bottom 500ms;\
         $("body").append(mask_html);
         $("body").append(dialog_html);
         $("body").append(actions_html);
@@ -147,14 +142,15 @@
             var _this = this;
             auto_hidden_interval = setTimeout(function(){
                 _this.hidden();
-            }, 1700);
+            }, 500);
         }
     }
     layout.prototype.show = function(html, options){
         this.showMask();
         this.showDialog(html, options);
     }
-    layout.prototype.showActions = function(html){
+    layout.prototype.showActions = function(html, type){
+        type = type || "bottom";
         html = $(html);
         layout_init();
         this.showMask();
@@ -163,22 +159,17 @@
             _this.hiddenActions()
         });
         actions_obj.append(html);
-        actions_obj.css({
-            "bottom"  : 0 - actions_obj.height(),
-            "display" : "block"
-        });
+        actions_obj.css("display", "block");
+        actions_obj.css(type, 0 - actions_obj.height());
         setTimeout(function(){
-            actions_obj.css({
-                "transition" : "bottom 200ms",
-                "bottom"     : 0
-            });
+            actions_obj.css("transition",  type + " 200ms");
+            actions_obj.css(type,  0);
         },20);
     };
-    layout.prototype.hiddenActions = function(){
+    layout.prototype.hiddenActions = function(type){
+        type = type || "bottom";
         this.hiddenMask();
-        actions_obj.css({
-            "bottom"  : 0 -actions_obj.height()
-        });
+        actions_obj.css(type, 0 - actions_obj.height());
         setTimeout(function(){
             actions_obj.empty();
             actions_obj.css({
@@ -186,6 +177,12 @@
                 "display"     : "none"
             });
         },200);
+    };
+    layout.prototype.showTopAction = function(html){
+        this.showActions(html, "top");
+    };
+    layout.prototype.hiddenTopAction = function(){
+        this.hiddenActions("top");
     };
     dialog = new layout();
     $.extend({"dialog" : dialog});
