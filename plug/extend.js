@@ -95,7 +95,7 @@
                         f_html += foreach_html;
                     });
                 }
-                $("foreach[id='" + name + "']" + name, html_template).replaceWith(f_html);
+                $("foreach[id='" + name + "']", html_template).replaceWith(f_html);
                 html_result = html_template.html();
             }
         };
