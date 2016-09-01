@@ -19,15 +19,23 @@ sss
 <script type="text/template" id="user_temp">
 
 <div>
-    {# name #}<p><img t_src="{# birth #}"></p>{# name #}<p>{# birth #}</p>
+    {# name #}<p><img t_src="{# img #}"></p>{# name #}<p>{# birth #}</p>
+
+    <if condition="'{# birth #}' == '0524' && '{# name #}' == 'shijun'">
+        <div>if success</div>
+    </if>
+    {# no_name #}
+    <var name="name" />--<var name="birth" />
+    <p><var name="no_name" default="default_name" /></p>
     <foreach id="foreach">
         <ul>
-            <li>{# foreach[a] #} {# foreach[a] #} {# foreach[a] #} {# foreach[a] #}</li>
+            <li>{# name #}{# foreach[a] #} </li>
             <li>{# foreach[b] #}</li>
-            <li>{# foreach[c] #}</li>
+            <li>{# foreach[c] #}
+                <if condition="'{# foreach[c] #}' == 'test3'"><span style="color:red">{# name #}</span></if>
+            </li>
         </ul>
     </foreach>
-    <foreach id="foreach"></foreach>
     <foreach id="test">
         <ul>
             <li>{# test[a] #}</li>
@@ -40,7 +48,7 @@ sss
 </script>
 </body>
 <script type="text/javascript">
-    var vars = {"name": "shijun", "birth":"0524"};
+    var vars = {"name": "shijun", "birth":"0524", "img":"http://tva1.sinaimg.cn/crop.1.0.244.244.180/402121d2tw1ef8anuw7pqj207006ut8y.jpg"};
     vars["foreach"] = [
         {"a": "test","b": "test1","c": "test3"},
         {"a": "test","b": "test1","c": "test4"},
