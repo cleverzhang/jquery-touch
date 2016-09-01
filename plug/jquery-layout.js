@@ -176,6 +176,7 @@
                 "transition" : "",
                 "display"     : "none"
             });
+            actions_obj.css(type, "");
         },200);
     };
     layout.prototype.showTopAction = function(html){
