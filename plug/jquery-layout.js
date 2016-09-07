@@ -165,6 +165,10 @@
             actions_obj.css("transition",  type + " 200ms");
             actions_obj.css(type,  0);
         },20);
+        var _this = this;
+        mask_obj.tap(function(){
+            _this.hiddenActions(type);
+        })
     };
     layout.prototype.hiddenActions = function(type){
         type = type || "bottom";
@@ -178,6 +182,7 @@
             });
             actions_obj.css(type, "");
         },200);
+        mask_obj.untap();
     };
     layout.prototype.showTopAction = function(html){
         this.showActions(html, "top");
