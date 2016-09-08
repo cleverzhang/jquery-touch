@@ -151,7 +151,7 @@
     }
     layout.prototype.showActions = function(html, type){
         type = type || "bottom";
-        html = $(html);
+        html = $.type("html") === "string" ? $(html) : html;
         layout_init();
         this.showMask();
         var _this = this;
