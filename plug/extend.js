@@ -12,10 +12,20 @@
     var _get_touch_position = function(e) {
         var touch_events = "touchstart touchmove touchend".split(" ");
         e = e.originalEvent || e;
-        if ($.inArray(e.type, touch_events)){
+        if ($.inArray(e.type, touch_events) != -1){
+            var o;
+            if (e.targetTouches.length){
+                o = e.targetTouches[0];
+            }
+            else if (e.touches.length){
+                o = e.touches[0];
+            }
+            else{
+                o = {'pageX':0,'pageY':0};
+            }
             return {
-                x: e.targetTouches[0].pageX,
-                y: e.targetTouches[0].pageY
+                x: o.pageX,
+                y: o.pageY
             };
         }
         else {
@@ -100,8 +110,8 @@
             }
         };
         var parse_if = function(){
-            $("if", html_template).each(function(){
-                var if_tag = $(this);
+            var if_tag = $("if:first", html_template);
+            while (if_tag.size() > 0){
                 var condition = if_tag.attr("condition");
                 try{
                     var _ret = eval(condition);
@@ -115,7 +125,8 @@
                 catch(e){
                     if_tag.remove();
                 }
-            });
+                if_tag = $("if:first", html_template);
+            }
             html_result = html_template.html();
         };
         if ($.isPlainObject(vars)){
