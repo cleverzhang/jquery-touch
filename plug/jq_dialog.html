@@ -12,8 +12,7 @@
 <script src="jquery-layout.js"></script>
 <script src="dialog.js"></script>
 <style>
-    html,body{margin:0;padding:0;-webkit-touch-callout: none;width:100%;height:100%;}
-    #debug{width: 100%;height:auto;}
+
 
 </style>
 <body class="wb_stock">
@@ -37,7 +36,9 @@
 //            }]);
             $.actions([{"text":"开始","func":function(){alert(1)}}])
         });
-
+        $("#tap1").tap(function(){
+            $.confirm("test",{},"<a href=#>ok</a>");
+        });
     });
 
 </script>
